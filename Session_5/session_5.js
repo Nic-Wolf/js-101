@@ -68,4 +68,4 @@ function Name() {
     };
 }
 // Why is this important??? well, first off, this is the original way of creating a private scope, meaning, nobody
-// can manipulate "name" unless you make a specific function to allow them to do so!
+// can manipulate "name" unless you (the original author) make a specific function to allow them to do so!
