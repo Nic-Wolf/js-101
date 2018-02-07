@@ -74,4 +74,28 @@ function Person() {
     };
 }
 
-// Try it out! :)
+
+// ADVANCED STUFF (i.e: 50093r L33+ h4x0rz 1oh1):
+// In the real world, we tend to use closures to maintain execution scope of specific functions, so we can add to
+// them. This is frequently considered hacking... because it basically is.
+// The execution scope, (closure) is different from the "this" scope, in that we can pass it around from function to
+// function!
+
+// Consider this:
+function l33tH4x(func) {
+    var newName = 'NOT ' + name + '! HAHA!';
+
+    // dive into setName() in the debugger, and you'll see "name" in a separate "closure" scope!
+    debugger;
+    return func.setName(newName);
+}
+
+// Using the Person class from above, see how we can affect it's internal, "private" variable, name:
+// Output:
+var person = new Person();
+person.setName('biff'); // "Setting the name..." "biff"
+person.getName(); // "Displaying the name..." "biff"
+l33tH4x(person); // "Hello, NOT biff! HAHA!!"
+person.getName(); // "Your name is NOT biff! HAHA!"
+
+// Fun stuff :)
