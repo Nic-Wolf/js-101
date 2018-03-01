@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app/server/server",
     "build": "tsc -p . ",
-    "test": "test"
+    "test": "jasmine spec/**/*spec.js"
   },
   "author": "Nic Wolf",
   "license": "ISC",

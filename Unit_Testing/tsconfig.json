@@ -7,7 +7,8 @@
     "strict": true
   },
   "include": [
-    "app/**/*"
+    "app/**/*",
+    "spec/**/*"
   ],
   "exclude": [
     "node_modules"
