@@ -5,16 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node app/server/server",
-    "build": "tsc -p . ",
     "test": "jasmine spec/**/*spec.js"
   },
   "author": "Nic Wolf",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^2.7.2",
-    "@types/node": "^9.4.6",
-    "@types/jasmine": "^2.8.6",
-    "tslint": "^5.9.1",
     "jasmine": "^3.1.0"
   }
 }
