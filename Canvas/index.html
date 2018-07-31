@@ -4,9 +4,38 @@
     <meta charset="UTF-8">
     <title>Canvas Work</title>
     <style>
-        #content { background-color: #cfcfcf;}
+        #content { background-color: #efefef;}
     </style>
+    <script>
+        window.onload = () => {
 
+            const canvas = document.getElementById('content');
+            const brush = canvas.getContext('2d');
+
+            // Style the renderer
+            brush.lineWidth = 3;
+            brush.strokeStyle = '#1299ee';
+
+            brush.beginPath(); // starts a new "path". important for memory use.
+                brush.moveTo(0, 0); // set the renderer to an x/y coordinate. (y is inverse)
+                brush.lineTo(30, 90);
+                brush.lineTo(60, 30);
+                brush.lineTo(90, 120);
+                brush.lineTo(120, 72);
+                brush.lineTo(150, 160);
+                brush.lineTo(180, 115);
+                brush.lineTo(210, 190);
+            brush.stroke();
+
+            brush.beginPath();
+                brush.arc(210, 190, 5, Math.PI*2, false);
+                brush.fillStyle = '#1299ee';
+                brush.fill();
+            brush.stroke();
+
+        };
+
+    </script>
 </head>
 <body>
     <div id="page_content">
