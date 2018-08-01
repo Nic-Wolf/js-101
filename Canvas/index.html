@@ -12,23 +12,60 @@
             const canvas = document.getElementById('content');
             const brush = canvas.getContext('2d');
 
-            // Style the renderer
+            // Clear the grid just in case.
+            brush.clearRect(0, 0, canvas.width, canvas.height);
+
+            function setAxis(axis, canvas, padding, resolution) {
+                const range = axis.toLowerCase() === 'x' ? canvas.width : canvas.height;
+
+                return {
+                    padding: padding,
+                    resolution: resolution,
+                    range: Math.floor((range - padding) / resolution, 2),
+                    length: range - padding
+                };
+            }
+
+            const x = setAxis('x', canvas, 50, 7);
+            const y = setAxis('y', canvas, 40, 11);
+
+            // Set up the Chart area.
+            brush.lineWidth = 2;
+            brush.strokeStyle = '#333';
+            brush.beginPath();
+            brush.moveTo(x.padding, 0);
+            brush.lineTo(x.padding, y.length);
+            brush.lineTo(canvas.width, y.length);
+            brush.stroke();
+
+            // Return an array of data points, where the first entry is the point closest to 0.
+            brush.lineWidth = 1;
+            brush.strokeStyle = '#999';
+            for (let i = 0; i < y.resolution; i++) {
+                let point = (y.length - (i * y.range));
+                brush.beginPath();
+                brush.moveTo(x.padding, point);
+                brush.lineTo(canvas.width, point);
+                brush.stroke();
+            }
+
+            // Style the data output
             brush.lineWidth = 3;
             brush.strokeStyle = '#1299ee';
 
             brush.beginPath(); // starts a new "path". important for memory use.
-                brush.moveTo(0, 0); // set the renderer to an x/y coordinate. (y is inverse)
-                brush.lineTo(30, 90);
-                brush.lineTo(60, 30);
-                brush.lineTo(90, 120);
-                brush.lineTo(120, 72);
-                brush.lineTo(150, 160);
-                brush.lineTo(180, 115);
-                brush.lineTo(210, 190);
+                brush.moveTo(x.padding, 0); // set the renderer to an x/y coordinate. (y is inverse)
+                brush.lineTo(x.padding+30, 90);
+                brush.lineTo(x.padding+60, 30);
+                brush.lineTo(x.padding+90, 120);
+                brush.lineTo(x.padding+120, 72);
+                brush.lineTo(x.padding+150, 160);
+                brush.lineTo(x.padding+180, 115);
+                brush.lineTo(x.padding+210, 190);
             brush.stroke();
 
             brush.beginPath();
-                brush.arc(210, 190, 5, Math.PI*2, false);
+                brush.arc(x.padding+210, 190, 5, Math.PI*2, false);
                 brush.fillStyle = '#1299ee';
                 brush.fill();
             brush.stroke();
