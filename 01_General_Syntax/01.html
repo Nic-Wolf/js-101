@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>General Syntax</title>
+</head>
+<body>
+    <h1>Intro to JavaScript</h1>
+
+    <h2>WTF IS JS Anyway, and Why do I care?</h2>
+    <p>JavaScript, or as it is known more formally, ECMAScript is a protocol that was originally written by the nice
+    folks at Netscape,(Mozilla today) to allow for interactivity in markdown files on the internet. Back in the day,
+    HTML - HyperText Markdown Language - was used by universities and government institutions to publish
+    documentation and share it globally, on this fancy new thing called the "internet".</p>
+    <p>While it started from humble beginnings, as personal computers became more and more powerful, migrating the
+    workload for interactive markdown from servers became the norm. Today, while it's still common within some
+    companies to use "thin client" applications, most of what you see on the internet is actually getting
+    processed right there on your own machine! Thanks, JavaScript!</p>
+    <p>JavaScript is many things, but keep in mind that despite it's name, it has absolutely nothing in common with
+    Java! Java is a compiled, strictly-typed, object-oriented language. JavaScript however, is a loosely-typed,
+    context-driven language. It does not compile in the normal sense, it is not formally object-oriented, and even
+    though it is flexible enough to allow for many different coding practices, it IS NOT JAVA! It doesn't even do
+    math in the same way!</p>
+    <p>As we progress, it will become more obvious what JS is, and what it is not. For now, just remember that it
+    was built originally for the web, and it is the most optimized way to create interactivity on the internet.</p>
+
+    <h2>Contexts</h2>
+    <h3>The Browser</h3>
+    <p>For the majority of these sessions, we will be writing our code for use within the browser. Here, our code is
+    executed as soon as each line of it is loaded. It loads our code from top-to-bottom, starting at the beginning
+    of our document, i.e.: the first line in our topmost HTML file.</p>
+    <p>We can also leverage a "REPL", which comes to us in the form of an execution console in the developer section
+    . We will use this console a lot, and get to know the other developer tools available to us as these sessions
+    progress.</p>
+    <p>Our code is maintained in a specific scope which we will talk more about, known as the DOM (Document Object
+    Model). Here, it is interpreted, compiled, (but not in the way you're probably thinking) and executed. It
+    interacts with all the relevant and available touch points your browser has, such as the address bar, the
+    page, cookies, and so on.</p>
+
+    <h3>Cloud Systems</h3>
+    <p>Some hosted applications try to distribute their processing responsibilities 50/50 between the browser and a
+    server. There are a number of reasons as to why this is useful, but I won't waste time talking about that.
+    Since we won't be coding against someone else's hosted app, all you need to know about this execution
+    context, is that it has to interpret the client-side JS from a server, which can mean that it turns the code
+    into a "string" then attempts to compile it through an application native to the server which recieved it. This
+    can cause interesting problems, but it can also safeguard user data in more reliable ways without
+    sacrificing performance.</p>
+
+    <h3>Node.js</h3>
+    <p>Ah, to be asynchronous! The most powerful aspect of JS, and why it's so much cooler than all the other
+    languages, is that it is legitimately asynchronous!... if we write it to be, that is. That means that we can
+    have it executing two different tasks simultaneously, regardless of the states of each other. They can even be
+    dependent on each other, and still process separately. Additionally, these mutliple processes can all occupy
+    the same thread, (and usually do)! Amazing stuff!</p>
+    <p>Node leverages the power of async in a very special way, and comes along with many useful tools for building
+    native system applications, just like you'd expect to see in Java or C#. It is considered one of the most
+    important frameworks you can learn, if you plan on specializing in the language.</p>
+    <p>Node, and thusly async programming is tricky to wrap your head around, but we'll cover it in some meaningful
+    ways as we move forward.</p>
+
+    <h2>General Syntax</h2>
+
+    <h2>Exercise 01 - </h2>
+
+</body>
+</html>

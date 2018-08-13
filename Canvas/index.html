@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Work</title>
+    <style>
+        #content { background-color: #efefef;}
+    </style>
+    <script src="./DataChart.class.js"></script>
+    <script>
+
+
+        window.onload = () => {
+
+            // Mock Data
+            const sales = [
+                { month: 'jan', total: 102 },
+                { month: 'feb', total: 80 },
+                { month: 'mar', total: 96 },
+                { month: 'apr', total: 44 },
+                { month: 'may', total: 122 },
+                { month: 'jun', total: 61 },
+                { month: 'jul', total: 72 }
+            ];
+
+            const canvas = document.getElementById('content');
+            const chart = new Chart(canvas, sales, 'line', 'month', 'total');
+            const brush = canvas.getContext('2d');
+            // Clear the grid just in case.
+            brush.clearRect(0, 0, canvas.width, canvas.height);
+            // debugger;
+            // Draw the chart border
+            brush.lineWidth = 2;
+            brush.strokeStyle = '#333';
+            brush.beginPath();
+            brush.moveTo(chart.x.padding, 0);
+            brush.lineTo(chart.x.padding, chart.y.length);
+            brush.lineTo(canvas.width, chart.y.length);
+            brush.stroke();
+
+            // Draw the chart lines
+            brush.lineWidth = 1;
+            brush.strokeStyle = '#999';
+            for (let i = 0; i < chart.y.lineCount; i++) {
+                let point = (chart.y.length - (i * chart.y.lineSpacing));
+                brush.beginPath();
+                brush.moveTo(chart.x.padding, point);
+                brush.lineTo(canvas.width, point);
+                brush.stroke();
+            }
+            for (let i = 0; i < chart.x.lineCount; i++) {
+                let point = ((canvas.width - chart.x.length) + chart.x.lineSpacing) + (i * chart.x.lineSpacing);
+                brush.beginPath();
+                brush.moveTo(point, chart.y.length + 5);
+                brush.lineTo(point, chart.y.length - 5);
+                brush.stroke();
+            }
+
+            // Draw the chart text for X
+            // brush.font = '14px Arial';
+            // brush.fillText('this is some text', 1, 10);
+            // brush.stroke();
+            // TODO - calculate the center point of a given text area
+
+            // for (let i = 0; i < chart.x.values; i++) {
+            //     brush.fillText('this is some text', 30, 100);
+            //     brush.stroke();
+            // }
+
+
+            // Draw the data points
+            brush.lineWidth = 3;
+            brush.strokeStyle = '#1299ee';
+            brush.beginPath(); // starts a new "path". important for memory use.
+             // set the renderer to an x/y coordinate. (y is inverse)
+            const yPerPixel = (chart.y.length / (chart.y.lineCount * 10));
+            brush.moveTo(chart.x.padding + chart.x.lineSpacing, chart.y.length - (yPerPixel * chart.y.values[0]));
+            for (let i = 0; i < chart.data.length; i++) {
+                let pointAtX = Math.floor(((i + 1) * chart.x.lineSpacing) + chart.x.padding);
+                let pointAtY = Math.floor(chart.y.length - (yPerPixel * chart.y.values[i]));
+                brush.lineTo(pointAtX, pointAtY);
+            }
+            brush.stroke();
+
+            // Draw the end point
+            brush.beginPath();
+                const arcX = Math.floor(chart.x.padding + (chart.x.lineSpacing * chart.data.length));
+                const arcY = Math.floor((chart.y.lineSpacing * chart.data.length) - chart.y.padding - 5);
+                brush.arc(arcX, arcY, 5, Math.PI*2, false);
+                brush.fillStyle = '#1299ee';
+                brush.fill();
+            brush.stroke();
+
+        };
+
+    </script>
+</head>
+<body>
+    <div id="page_content">
+        <canvas id="content" width="400" height="300">Canvas is not supported by your browser.</canvas>
+    </div>
+</body>
+</html>

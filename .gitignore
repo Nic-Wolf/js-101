@@ -1,1 +1,4 @@
 .idea/
+**/node_modules
+Unit_Testing/**/*.js
+Unit_Testing/**/*.map
