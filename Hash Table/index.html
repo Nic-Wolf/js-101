@@ -4,6 +4,36 @@
     <meta charset="UTF-8">
     <title>Hash Table</title>
     <script src="./HashTable.class.js"></script>
+    <script src="./HashTable.spec.js"></script>
+
+    <script>
+        window.onload = function() {
+
+            const results = runTests();
+
+            const outputElem = document.getElementById('output');
+
+            for (let i = 0; i < results.length; i++) {
+                let result = document.createElement('label');
+                result.style.backgroundColor = results[i].result.pass ? '#699d2d' : '#da1507';
+                result.style.color = '#fcfcfc';
+                result.style.fontFamily = 'Tahoma';
+                result.innerText = results[i].result.text;
+                let code = document.createElement('code');
+                code.innerText = results[i].data;
+
+                let div = document.createElement('div');
+                div.appendChild(result);
+                div.appendChild(document.createElement('br'));
+                div.appendChild(code);
+
+                let li = document.createElement('li');
+                li.appendChild(div);
+                outputElem.appendChild(li);
+            }
+
+        };
+    </script>
 </head>
 <body>
     <h2>Results:</h2>
