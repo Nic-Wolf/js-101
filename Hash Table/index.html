@@ -8,19 +8,20 @@
 
     <script>
         window.onload = function() {
-
+            debugger;
             const results = runTests();
 
             const outputElem = document.getElementById('output');
 
             for (let i = 0; i < results.length; i++) {
                 let result = document.createElement('label');
-                result.style.backgroundColor = results[i].result.pass ? '#699d2d' : '#da1507';
+                result.style.backgroundColor = results[i].pass ? '#699d2d' : '#da1507';
                 result.style.color = '#fcfcfc';
                 result.style.fontFamily = 'Tahoma';
-                result.innerText = results[i].result.text;
+                result.innerText = results[i].pass ? '-SUCCESS- ' : '-FAIL- ';
+                result.innerText += results[i].testStr;
                 let code = document.createElement('code');
-                code.innerText = results[i].data;
+                code.innerText = results[i].details;
 
                 let div = document.createElement('div');
                 div.appendChild(result);
