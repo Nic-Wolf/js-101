@@ -5,26 +5,24 @@ function runTests() {
     // Test: init class
     const options = {};
     const hashTable = new HashTable(options);
-    // // Assertion
-    // const test1 = objIsEquivalent(hashTable, new HashTable()) ?
-    //     {text: 'Success - Hash Table initialized.', pass: true} :
-    //     {text: 'Fail - Could not construct Hash Table.', pass: false };
-
-    const test1 = new Assertion(`Initializing hashTable as HashTable.`, hashTable);
-    test1.test(objIsEquivalent(hashTable, new HashTable()));
-    results.push(test1);
+    // Assertion
+    let test = new Assertion(`Initializing hashTable as HashTable.`, hashTable);
+    test.dataSameAs(new HashTable());
+    results.push(test);
 
 
     // Test: add entry
-    // const aKey = 'thing';
-    // const aValue = 12345;
-    // hashTable.insert(aKey, aValue);
-    // // Assertion
-    // const expectedData = Object.assign({}, { [aKey]: aValue });
-    // const test2 = objIsEquivalent(hashTable[aKey], expectedData) ?
-    //     'Success - Entry added to Hash Table.' :
-    //     'Fail - Could not apply new entry.';
-    // results.push({ result: test2, data: {[Object.keys(hashTable[aKey])]: hashTable[aKey]} });
+    const aKey = 'thing';
+    const aValue = 12345;
+    hashTable.set(aKey, aValue, 'static');
+    // Assertion
+    test = new Assertion('Assigning a new static member to hashTable.', hashTable);
+    test.dataContains(aKey, aValue);
+    results.push(test);
+
+    test = new Assertion('Validation: static member value cannot be changed.', hashTable);
+    test.overwriteMember(aKey, 'derpderpderpderp');
+    results.push(test);
 
 
     // Test: retrieve entry value
@@ -49,11 +47,9 @@ class Assertion {
     constructor(testStr, data) {
         this.testStr = testStr;
         this.data = data;
+        this.pass = false;
+        this.details = '';
 
-        this.setDetails(this.data);
-    }
-
-    setDetails(data) {
         if (typeof data === 'object') {
             this.details = `${data.constructor.name}: ${JSON.stringify(data)}`
         } else {
@@ -61,18 +57,23 @@ class Assertion {
         }
     }
 
-    test(callback) {
-        this.pass = callback;
-    }
-
-    // Assertion
+    // Tests
     dataSameAs(val) {
-        return objIsEquivalent(this.data, val);
+        this.pass = objIsEquivalent(this.data, val);
     }
 
-    dataHasParam(key, val) {
+    dataContains(key, val) {
         const expectedData = Object.assign({}, { [key]: val });
-        return objIsEquivalent(this.data[key], expectedData);
+        this.pass = objIsEquivalent(this.data[key], expectedData[key]);
+    }
+
+    overwriteMember(key, val) {
+        try {
+            this.data[key] = val;
+        } catch (e) {
+            // do nothing. this really should throw an error.
+        }
+        this.pass = (this.data[key] !== val);
     }
 }
 
