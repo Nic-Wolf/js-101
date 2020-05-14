@@ -12,12 +12,46 @@ We will be implementing unit tests within a basic web application. Our tests sho
 
 ### Ground-Up Installation (The Hard Way)
 *This process is used to simulate the steps you must take to apply unit testing to a project that was not built with unit testing initially.*
+
 #### Setup
 * Clone the **sans-test** branch a new project: `$ git clone https://github.com/Nic-Wolf/js-101/tree/sans-test`
 * Navigate inside the Unit_Testing folder: `$ cd ~/js-101/Unit_Testing`
+* Install TypeScript: `$ npm install --save-dev typescript`
+* Initialize TypeScript Configuration: `$ tsc --init`
+* Configure execution scripts:
+    ```
+    "scripts": {
+        "start": "node server/server",
+        "build": "tsc -p . ",
+        "test": "TBA"
+    }
+    ```
+* Install TypeScript Definitions ([Full List of Supported Definitions](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types))
+    * Node.js: `$ npm install --save-dev @types/node`
+    * Jasmine: `$ npm install --save-dev @types/jasmine`
+* Install TSLint: `$ npm install --save-dev tslint`
+* Initialize TSLint Configuration: `$ tslint --init`
+* Configure linting rules:
+    ```
+    "rules": {
+        "quotemark": [
+          true,
+          "single",
+          "avoid-escape"
+        ],
+        "no-console": false,
+        "only-arrow-functions": [
+          true,
+          "allow-declarations",
+          "allow-named-functions"
+        ],
+        "trailing-comma": false
+    }
+    ```
 * Install Jasmine: `$ npm install --save-dev jasmine`
 * Initialize Jasmine: `$ jasmine init`
-##### Choices!
+
+#### Choices!
 *We will need a way to view our tests. We can do this several ways:*
 * Use only the console output: 
     * Install Jasmine globally: `$ npm install -g jasmine`

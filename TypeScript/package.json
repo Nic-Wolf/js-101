@@ -1,0 +1,15 @@
+{
+  "name": "TypeScript",
+  "version": "1.0.0",
+  "description": "We will be implementing unit tests within a basic web application. Our tests should not only be relevant to the technical architecture of the application, but also double as a form of reliable system documentation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
