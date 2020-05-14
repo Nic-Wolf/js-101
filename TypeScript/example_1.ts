@@ -15,7 +15,7 @@ axios.get(url).then(response => {
     const title = todo.title;
     const finished = todo.completed;
 
-    logTodo(id, finished, title); // intentionally wrong
+    logTodo(id, title, finished);
 });
 
 const logTodo = (id: number, title: string, status: boolean) => {
