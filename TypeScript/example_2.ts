@@ -37,9 +37,28 @@ function doMoreThings(val: number): void {
 }
 
 // Destructuring with annotations
-function getData(data: {id: number, title: string, date: Date}): void {
+const response = {
+    id: 1234,
+    title: 'SENSITIVE DATA!!',
+    date: new Date()
+};
+
+// No Destructuring:
+function logDataA(data: {id: number, title: string, date: Date}): void {
     console.log(data.title);
     console.log(data.date);
+}
+
+// Destructuring via ES2015:
+function logDataB({title, date}) {
+    console.log(title);
+    console.log(date);
+}
+
+// Destructuring via TS:
+function logDataC({title, date}: {title: string, date: Date}): void {
+    console.log(title);
+    console.log(date);
 }
 
 // "Any" types - always try to annotate.
