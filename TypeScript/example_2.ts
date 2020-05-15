@@ -26,6 +26,22 @@ const doThings: (val: number) => string = (val) => {
     return `a string: ${val}`;
 };
 
+// A cleaner way.
+const doOtherThings = (a: number, b: number): number => {
+    return a + b;
+}
+
+function doMoreThings(val: number): void {
+    const a = val * val;
+    console.log("The squared value is: " + a);
+}
+
+// Destructuring with annotations
+function getData(data: {id: number, title: string, date: Date}): void {
+    console.log(data.title);
+    console.log(data.date);
+}
+
 // "Any" types - always try to annotate.
 const jsonString = '{"x": 10, "y": 20}';
 const coord: {x:number; y:number} = JSON.parse(jsonString); // No error, but parse returns "any", which can't be evaluated for issues.
