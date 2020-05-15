@@ -39,3 +39,13 @@ pepsi[0] = 50;
 type Drink = [string, boolean, number];
 const coke: Drink = ['brown', true, 40];
 coke[1] = 50;
+
+// tuples aren't very well described.
+const carSpecsA: [number, number] = [400, 3354];
+
+// try to use objects instead.... but you knew that already.
+const carSpecsB = {
+    horsepower: 400,
+    weight: 3354
+};
+
