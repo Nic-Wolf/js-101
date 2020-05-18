@@ -1,7 +1,15 @@
 // Classes
 
 class Vehicle {
-    private drive(): void {
+    color: string;
+    make: string;
+    model: string;
+
+    constructor(color: string) {
+        this.color = color;
+    }
+
+    protected drive(): void {
         console.log('moving...');
     }
     protected honk(): void {
