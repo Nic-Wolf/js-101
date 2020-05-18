@@ -1,12 +1,7 @@
 // Classes
 
 class Vehicle {
-    color: string;
-    make: string;
-    model: string;
-
-    constructor(color: string) {
-        this.color = color;
+    constructor(public color: string) {
     }
 
     protected drive(): void {
