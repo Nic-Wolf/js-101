@@ -1,13 +1,24 @@
 // Interfaces
-// The problem...
-const oldCivic = {
+
+interface Vehicle {
+    name: string;
+    year: number;
+    broken: boolean;
+}
+
+const oldCivic: Vehicle = {
     name: 'civic',
     year: 2000,
     broken: true
 };
-// LOOOONG Annotaitons
-const printVehicle = (vehicle: {name: string; year: number; broken: boolean }): void => {
-    console.log(`Name: ${vehicle.name}\nYear: ${vehicle.year}\nIs Broken? ${vehicle.broken}`);
+
+// Better.
+const printVehicle = (vehicle: Vehicle): void => {
+    console.log(`
+    Name: ${vehicle.name}
+    Year: ${vehicle.year}
+    Is Broken? ${vehicle.broken}
+    `);
 };
 
 printVehicle(oldCivic);
