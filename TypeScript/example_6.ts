@@ -1,10 +1,10 @@
 // Classes
 
 class Vehicle {
-    drive(): void {
+    private drive(): void {
         console.log('moving...');
     }
-    honk(): void {
+    protected honk(): void {
         console.log('HONK');
     }
 }
@@ -14,12 +14,16 @@ class Car extends Vehicle {
     drive(): void {
         console.log('Eurobeat Intensifies...');
     } 
+    startDriving(): void {
+        this.drive();
+        this.honk();
+    }
 }
 
 const vehicle = new Vehicle();
+// no longer allowed to be called externally.
 vehicle.drive();
 vehicle.honk();
 
 const car = new Car();
-car.drive();
-car.honk();
+car.startDriving();
