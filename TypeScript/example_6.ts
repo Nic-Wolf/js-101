@@ -14,8 +14,21 @@ class Vehicle {
 
 // Method Overrides...
 class Car extends Vehicle {
+    // Child constructors can't override the parents...
+    constructor(public wheels: number, color: string) {
+        // So we call the parent constructor inside, if 
+        // we need a more specific constructor for the child.
+        // ... don't specify "public", since we just want the 
+        // value passed through. no new var needed.
+        super(color);
+
+    }
+
     drive(): void {
-        console.log('Eurobeat Intensifies...');
+        console.log(`
+        Eurobeat Intensifies...
+        The car is ${this.color}, with ${this.wheels} wheels.
+        `);
     } 
     startDriving(): void {
         this.drive();
@@ -23,10 +36,5 @@ class Car extends Vehicle {
     }
 }
 
-const vehicle = new Vehicle();
-// no longer allowed to be called externally.
-vehicle.drive();
-vehicle.honk();
-
-const car = new Car();
+const car = new Car(4, 'red');
 car.startDriving();
