@@ -10,56 +10,45 @@ function fakeApiEndpoint(itemId) {
         },
         "item2": {
             "contents": "... And the second item.",
-            "details": 0
+            "details": Math.round(Math.random() * 1000)
         },
         "item3": {
             "contents": "Here is item three.",
-            "details": 0
+            "details": Math.round(Math.random() * 1000)
         },
         "item4": {
             "contents": "The fourth item is here!",
-            "details": 0
+            "details": Math.round(Math.random() * 1000)
         }
     };
 
     // Mimick a web request.
-    console.log('Request: ' + itemId);
+    console.log('Requesting item from the server... ' + itemId);
     setTimeout(function() {
-        console.log('Response: ' + db_as_json[itemId]);
+        console.log('Response: ' + JSON.stringify(db_as_json[itemId]));
         // Challenge 1:
         // We need a good method for handling our response.
         //   a. How can we guarantee that we're getting data?
         //   b. How can we apply the data to existing resources?
         //   c. How should we handle errors?
-        // ...
 
-//
-//     }, (Math.round(Math.random() * 10000) % 5000) + 1000);
-// }
-//
-// function getItem(itemId) {
-//     return fakeApiEndpoint(itemId);
-// }
-
-
-    callback(db_as_json[itemId]);
-
-
-}, (Math.round(Math.random() * 10000) % 5000) + 1000);
+    }, (Math.round(Math.random() * 10000) % 5000) + 1000);
 }
 
 function getItem(itemId) {
-    return new Promise(function(resolve, reject) {
-        fakeApiEndpoint(itemId, resolve);
-    });
+    return fakeApiEndpoint(itemId);
 }
-
 
 //////////////////////////////////
 // Normal Promises
 
+// Promises act like preprocessors for your functions.
+
+
 // Challenge 2:
 // How can we refactor the getItem() function to act like a promise?
+// Promises MUST resolve, so we need to return our information while
+// calling the resolve function.
 function getItem(itemId) {
     return new Promise(function(resolve, reject) {
         fakeApiEndpoint(itemId, resolve);

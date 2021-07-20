@@ -10,29 +10,29 @@ function fakeApiEndpoint(itemId, callback) {
         },
         "item2": {
             "contents": "... And the second item.",
-            "details": 0
+            "details": Math.round(Math.random() * 1000)
         },
         "item3": {
             "contents": "Here is item three.",
-            "details": 0
+            "details": Math.round(Math.random() * 1000)
         },
         "item4": {
             "contents": "The fourth item is here!",
-            "details": 0
+            "details": Math.round(Math.random() * 1000)
         }
     };
 
     // Mimick a web request.
-    console.log('Request: ' + itemId);
+    console.log('Requesting item from the server... ' + itemId);
+    var code = 0;
     setTimeout(function() {
-        console.log('Response: ' + db_as_json[itemId]);
+        console.log('Server Response: ' + JSON.stringify(db_as_json[itemId]));
 
+        // Place a callback function on the server, and use that for our resolution.
+        // we don't need to handle the result since we're just logging data.
         callback.then(function(result) {
-            console.log('Response: ' + db_as_json[itemId]);
-
+            console.log('Callback Response: ' + JSON.stringify(db_as_json[itemId]));
         });
-
-
 
     }, (Math.round(Math.random() * 10000) % 5000) + 1000);
 }
