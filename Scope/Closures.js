@@ -1,10 +1,10 @@
 // Consider the following object:
 function Person() {
     this.name = '';
-    this.getName = function() {
+    this.getName = function () {
         return this.name;
     };
-    this.setName = function(value) {
+    this.setName = function (value) {
         this.name = value;
     };
 }
@@ -29,11 +29,11 @@ function Person() {
     // will... however, since the "getName" inner function is referencing the "name" variable", it also persists
     // within the returned object!
     return {
-        getName: function() {
+        getName: function () {
             console.log('Displaying the name...');
             return name;
         },
-        setName: function(value) {
+        setName: function (value) {
             console.log('Setting the name...');
             name = value;
         }
@@ -56,7 +56,7 @@ person // Person {getName: ƒ, setName: ƒ}
 function Person() {
     var name;
 
-    this.getName = function() {
+    this.getName = function () {
         if (name) {
             console.log('Your name is ' + name);
         } else {
@@ -64,7 +64,7 @@ function Person() {
         }
     };
 
-    this.setName = function(value) {
+    this.setName = function (value) {
         if (!!value) {
             name = value;
             console.log('Hello, ' + name + '!');
