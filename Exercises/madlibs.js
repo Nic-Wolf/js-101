@@ -116,6 +116,11 @@ function madLib(words) {
 //----------------------------------------------------------------------------//
 
 // Firstly, we will need to specify the types of our words we plan on using.
+// Consider this:
+
+// we have a list of objects, each with the same parameters. This is often how data will be sent to our code.
+// but what type of data is this? Yes, it is an "object", but it's more specific than that.
+// It is good practice to have definitions for these custom data types. For this, we will use Classes.
 
 // What we ultimately want:
 var parameterDefinition = {
@@ -125,6 +130,7 @@ var parameterDefinition = {
 // How do we establish the data definition for something like a function parameter, or other dynamic data object?
 
 // We can accomplish this a few ways, but we'll use the more conscientious approach of building a class.
+
 // Classes are templates for objects. These are similar to function definitions, since they are only intended
 // to be defined once, then copied as needed throughout the code. The difference with functions however,
 // is that they won't throw errors if you redefine them over and over. A Class will.
@@ -138,41 +144,134 @@ function Word(type, word) {
     this.value = word;
 }
 
+// Now, consider that we have our list of "Word" objects.
+// Writing out the data long-form like this is known as JSON: JavaScript Object Notation. ("jay"-"sahn").
+var words = [
+    { type: 'noun', value: 'beans' },
+    { type: 'adjective', value: 'slimey' },
+    { type: 'verb', value: 'running' },
+    { type: 'noun', value: 'dog' },
+    { type: 'adjective', value: 'red' }
+];
+// This is usually how we will be consuming data from other places, so expect to see it frequently.
+
+// Some of the trickiest parts of programming is knowing how best to parse through data before doing things to it.
+// Stepping away from madlibs for a moment... how can we get all the objects which have type of "noun"?
+
+// we could use a for-loop and assign a new list...
+var nouns = [], verbs = [], adjectives = [];
+for (var i = 0; i < words.length; i++) {
+    if (words[i].type == 'noun') {
+        nouns.push(words[i]);
+    } else if (words[i].type == 'verb') {
+        verbs.push(words[i]);
+    } else if (words[i].type == 'adjective') {
+        adjectives.push(words[i]);
+    } else {
+        console.log('Error! got a word type we were not expecting: ' + words[i].type);
+    }
+}
+// That looks good... but let's SWITCH IT UP!
+// switch statements, much like if-statements allow us to evaluate logical conditions
+// but instead of applying just one, switches can cascade through all the conditions sequentially.
+// to avoid the cascade effect, we can use the keyword "break" as needed. Similarly, if we wanted 
+// to force the continuation of a process manually, we could use the keyword, "continue"... though 
+// you'll likely never see a 'continue' in a switch, since it does it by default.
+// Speaking of "default", this condition represents a catch-all for everything that was not specified.
+// essentially, cases are the "else if", and default is the "else". 
+// There is never a reason to "break" in the default condition.
+var nouns = [], verbs = [], adjectives = [];
+for (var i = 0; i < words.length; i++) {
+    switch (words[i].type) {
+        case 'noun':
+            nouns.push(words[i]);
+            break;
+        case 'verb':
+            verbs.push(words[i]);
+            break;
+        case 'adjective':
+            adjectives.push(words[i]);
+            break;
+        default:
+            console.log('Error! got a word type we were not expecting: ' + words[i].type);
+    }
+}
+
+
+
+
+
 function madLib(words) {
     // First, let's adjust the template:
     var template = 'Last week, I _verb_ to the _noun_ and ordered a _noun_. Even though it was _adjective_, it tasted _adjective_!';
 
-    // next, we'll need to check the totals for verbs, nouns, and adjectives.
-    var nouns = template.split('_noun_');
-    var verbs = template.split('_verb_');
-    var adjectives = template.split('_adjective_');
-
-    // We will have to do the same thing with our list of words.
-    // TODO - finish this
-
-
-
-
     try {
-        var wordsRecieved = words.length;
-        var output;
+        // We are about to run into a complication. We will have a list of nouns, verbs, and adjectives, both as the locations pruned
+        // from the text, and from the user input.
+        // how can we reliably associate one to the other?
+        // how can we tell the template to update correctly?
+        // ... more on this soon. Think on it.
 
-        // When you have a lot of conditions to meet, you can cascade through a switch statement, 
-        // which is similar to an if statement, but will try to sequentially execute each case, unless we specifically break out.
+        // We will have to do the same thing with our list of words.
+        // How we do this will be driven by how our data is set up... 
+        // which is why we developed the Word class beforehand.
+        // we will first assume that all the user data in the words list is consistently of the Word-class definition
+        // with that in mind, we can assign values.
+        var nouns = [], verbs = [], adjectives = [];
 
-
-
-        if (wordsRecieved == wordsAvailable) {
-            for (var i = 0; i < words.length; i++) {
-                templateParts[i] = templateParts[i] + words[i];
+        for (var i = 0; i < words.length; i++) {
+            if (words[i].type == 'noun') {
+                nouns.push(words[i].value);
+            } else if (words[i].type == 'verb') {
+                verbs.push(words[i].value);
+            } else if (words[i].type == 'adjective') {
+                adjectives.push(words[i].value);
+            } else {
+                console.log('Error! got a word type we were not expecting: ' + words[i].type);
             }
-            output = templateParts.join('');
-
-        } else {
-            throw Error('There are ' + wordsAvailable + ' blank words in the template, but it recieved ' + wordsRecieved + '.');
         }
 
-        return output;
+        // next, we'll need to check the totals for verbs, nouns, and adjectives.
+        var t_nouns = template.split('_noun_');
+        var t_verbs = template.split('_verb_');
+        var t_adjectives = template.split('_adjective_');
+        var error = false;
+        var message = '';
+
+        if (nouns.length != t_nouns.length) {
+            message += '\nThere are ' + t_nouns.length + ' nouns in the template, but it recieved ' + nouns.length + '.';
+            error = true;
+        }
+        if (verbs.length != t_verbs.length) {
+            message += '\nThere are ' + t_verbs.length + ' verbs in the template, but it recieved ' + verbs.length + '.';
+            error = true;
+        }
+        if (adjectives.length != t_adjectives.length) {
+            message += '\nThere are ' + t_adjectives.length + ' adjectives in the template, but it recieved ' + adjectives.length + '.';
+            error = true;
+        }
+        if (!!error) {
+            // We should compile our varous errors into one, so we can know everything that failed in one go.
+            throw Error(message);
+        }
+
+        // Assuming everything is in order, now, we need to assign values.
+        var output = template; // this is a copy of our template. we will be changing the values in this variable.
+
+        for (var i = 0; i < t_nouns.length; i++) {
+            // ... but how do we get the input values in the right places? t_nouns isn't actually connected to the template data!
+            // actually, there are many ways we can accomplish this, but let's go back to an earlier example for this solution:
+            output = output.replace('_noun_', nouns[i].value); // we can dynamically reassign string data.
+        }
+        // then simply do the same for the other entries.
+        for (var i = 0; i < t_verbs.length; i++) {
+            output = output.replace('_verb_', verbs[i].value);
+        }
+        for (var i = 0; i < t_adjectives.length; i++) {
+            output = output.replace('_adjective_', adjectives[i].value);
+        }
+
+        return output
 
     } catch (e) {
         console.log('Something went wrong!\n' + e);
