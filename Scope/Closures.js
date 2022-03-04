@@ -99,3 +99,11 @@ l33tH4x(person); // "Hello, NOT biff! HAHA!!"
 person.getName(); // "Your name is NOT biff! HAHA!"
 
 // Fun stuff :)
+
+
+// Singletons: Classes which we only want to have 1 instance of an object.
+// This is used frequently with code modules and services.
+var iife = (function (a, b) {
+    return new Word(a, b);
+})('varb', 'running');
+// We'll look at these more later.

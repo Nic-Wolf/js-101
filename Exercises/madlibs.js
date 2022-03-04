@@ -172,6 +172,7 @@ for (var i = 0; i < words.length; i++) {
     }
 }
 // That looks good... but let's SWITCH IT UP!
+
 // switch statements, much like if-statements allow us to evaluate logical conditions
 // but instead of applying just one, switches can cascade through all the conditions sequentially.
 // to avoid the cascade effect, we can use the keyword "break" as needed. Similarly, if we wanted 
@@ -197,10 +198,7 @@ for (var i = 0; i < words.length; i++) {
     }
 }
 
-
-
-
-
+// Let's put it all together
 function madLib(words) {
     // First, let's adjust the template:
     var template = 'Last week, I _verb_ to the _noun_ and ordered a _noun_. Even though it was _adjective_, it tasted _adjective_!';
@@ -277,11 +275,3 @@ function madLib(words) {
         console.log('Something went wrong!\n' + e);
     }
 }
-
-
-// Singletons: Classes which we only want to have 1 instance of an object.
-// This is used frequently with code modules and services.
-var iife = (function (a, b) {
-    return new Word(a, b);
-})('varb', 'running');
-// We'll look at these more later.
